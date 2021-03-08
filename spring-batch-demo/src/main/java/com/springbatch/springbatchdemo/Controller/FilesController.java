@@ -43,6 +43,13 @@ public class FilesController {
 			storageService.save(file);
 
 			BatchStatus status = loadService.load();
+			
+			if(status.COMPLETED != null) {
+				message = "Job Executed Successfully";
+			}else {
+				message = "Job Executed Unsuccessfully";
+			}
+			
 
 			return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
 		} catch (Exception e) {
@@ -53,10 +60,15 @@ public class FilesController {
 
 	@GetMapping("/download")
 	public ResponseEntity<ResponseMessage> downloadFile() {
-		String message = "File Download Success";
+		String message = "";
 		try {
 
-			loadService.down();
+			BatchStatus status = loadService.down();
+			if(status.COMPLETED != null) {
+				message = "File Download Successfully";
+			}else {
+				message = "File Doesn't Download";
+			}
 
 			return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
 		} catch (Exception e) {
