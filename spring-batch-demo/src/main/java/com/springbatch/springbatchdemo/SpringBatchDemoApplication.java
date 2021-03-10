@@ -15,8 +15,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class SpringBatchDemoApplication  {
 
-	@Resource
-	  FilesStorageService storageService;
+
 	
 	public static void main(String[] args) {
 		SpringApplication.run(SpringBatchDemoApplication.class, args);
